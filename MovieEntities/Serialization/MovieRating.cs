@@ -1,57 +1,56 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace MovieEntities.Serialization
 {
-    [DataContract]
     public class MovieRating
     {
-        [DataMember(Name = "id")]
+        [JsonProperty(PropertyName = "id")]
         public Guid Id { get; set; }
 
-        [DataMember(Name = "slug")]
+        [JsonProperty(PropertyName = "slug")]
         public string Slug { get; set; }
 
-        [DataMember(Name = "content_type")]
+        [JsonProperty(PropertyName = "content_type")]
         public string ContentType { get; set; }
 
-        [DataMember(Name = "title")]
+        [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
-        [DataMember(Name = "imdb_rating")]
-        public decimal ImdbRating { get; set; }
+        [JsonProperty(PropertyName = "imdb_rating")]
+        public decimal? ImdbRating { get; set; }
 
-        [DataMember(Name = "rt_critics_rating")]
-        public decimal RottenTomatoesRating { get; set; }
+        [JsonProperty(PropertyName = "rt_critics_rating")]
+        public decimal? RottenTomatoesRating { get; set; }
 
-        [DataMember(Name = "has_poster")]
+        [JsonProperty(PropertyName = "has_poster")]
         public bool HasPoster { get; set; }
 
-        [DataMember(Name = "has_backdrop")]
+        [JsonProperty(PropertyName = "has_backdrop")]
         public bool HasBackdrop { get; set; }
 
-        [DataMember(Name = "released_on")]
+        [JsonProperty(PropertyName = "released_on")]
         public DateTime ReleasedOn { get; set; }
 
-        [DataMember(Name = "classification")]
+        [JsonProperty(PropertyName = "classification")]
         public string Classification { get; set; }
 
-        [DataMember(Name = "sources")]
+        [JsonProperty(PropertyName = "sources")]
         public string[] Sources { get; set; }
 
-        [DataMember(Name = "on_services")]
+        [JsonProperty(PropertyName = "on_services")]
         public bool OnServices { get; set; }
 
-        [DataMember(Name = "on_free")]
+        [JsonProperty(PropertyName = "on_free")]
         public bool OnFree { get; set; }
 
-        [DataMember(Name = "on_rent_purchase")]
+        [JsonProperty(PropertyName = "on_rent_purchase")]
         public bool OnRentPurchase { get; set; }
 
-        [DataMember(Name = "watchlisted")]
+        [JsonProperty(PropertyName = "watchlisted")]
         public bool Watchlisted { get; set; }
 
-        [DataMember(Name = "seen")]
+        [JsonProperty(PropertyName = "seen")]
         public bool Seen { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using MovieEntities.Serialization;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DataCompiler
 {
@@ -27,12 +28,13 @@ namespace DataCompiler
             {
                 //BaseAddress = new Uri(String.Format(urlTemplate, i * 100, (i + 1) * 100 - 1))
             };
-            var deserializer = new DataContractJsonSerializer(typeof(List<MovieRating>));
+            var deserializer = new JsonSerializer();
 
             var url = String.Format(urlTemplate, 101, 1);
-            var stringResult = await client.GetStringAsync(url);
-            var rawResult = client.GetStreamAsync(url);
-            return deserializer.ReadObject(await rawResult) as List<MovieRating>;
+
+            var streamResult = client.GetStreamAsync(url);
+            using (var responseRead = new JsonTextReader(new StreamReader(await streamResult)))
+                return deserializer.Deserialize<List<MovieRating>>(responseRead);
         }
     }
 }
