@@ -5,7 +5,7 @@ using MovieEntities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
 
-namespace MovieEntities
+namespace DataCompiler
 {
     public class Startup
     {
