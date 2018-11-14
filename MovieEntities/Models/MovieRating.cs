@@ -1,7 +1,7 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace MovieEntities
+namespace MovieEntities.Models
 {
     public class MovieRating
     {
@@ -15,7 +15,7 @@ namespace MovieEntities
         public bool HasBackdrop { get; set; }
         public DateTime ReleasedOn { get; set; }
         public string Classification { get; set; }
-        public string[] Sources { get; set; }
+        public List<MovieSource> Sources { get; set; }
         public bool OnServices { get; set; }
         public bool OnFree { get; set; }
         public bool OnRentPurchase { get; set; }
