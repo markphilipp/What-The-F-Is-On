@@ -10,10 +10,8 @@ namespace MovieEntities
     {
         private readonly MovieContext _movieContext;
 
-        public AutoMapperProfile(MovieContext movieContext)
+        public AutoMapperProfile()
         {
-            this._movieContext = movieContext;
-
             CreateMapsViaReflection();
             AddCustomMappings();
         }
@@ -41,7 +39,11 @@ namespace MovieEntities
         private void AddCustomMappings()
         {
             CreateMap<string, MovieSource>()
-                .ConvertUsing(str => this._movieContext.Sources.FirstOrDefault(s => s.Name == str));
+                .ConvertUsing((str) => 
+            {
+                ConsoleContainer.Curren
+                this._movieContext.Sources.FirstOrDefault(s => s.Name == str);
+            });
         }
     }
 }
