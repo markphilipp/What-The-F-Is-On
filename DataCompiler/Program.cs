@@ -8,6 +8,7 @@ using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DataCompiler
 {
@@ -17,16 +18,17 @@ namespace DataCompiler
         static void Main(string[] args)
         {
             // Call the startup class config methods
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
 
-            new DataLoader().Run();
+            using (var a = host.Services.CreateScope())
+            {
+                new DataLoader().Run();
+            }
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
-
-
     }
 }

@@ -4,12 +4,13 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
+using DataCompiler.Interfaces;
 using MovieEntities.Models;
 using Newtonsoft.Json;
 
-namespace DataCompiler
+namespace DataCompiler.Services
 {
-    public class DataLoader
+    public class DataLoader : IDataLoader
     {
         const string urlTemplate = @"https://api.reelgood.com/v2/browse/source/netflix?availability=onSources&content_kind=both&hide_seen=false&hide_tracked=false&hide_watchlisted=false&imdb_start={1}&imdb_end={0}&override_user_sources=true&overriding_free=false&overriding_sources=netflix&rt_end=100&rt_start=0&skip=50&sort=0&sources=netflix&take=50&year_end=2018&year_start=1970";
         private readonly IMapper mapper;
@@ -19,13 +20,13 @@ namespace DataCompiler
             this.mapper = mapper;
         }
 
-        internal void Run()
+        public void Run()
         {
             // Just testing the method
             var rawResults = GetResult().Result;
 
             var models = mapper.Map<MovieRating>(rawResults);
-            System.Diagnostics.Debugger.Log(models.ToString());
+            System.Diagnostics.Debugger.Log(1, "Debug", models.ToString());
         }
 
         private static async Task<List<MovieRating>> GetResult()
