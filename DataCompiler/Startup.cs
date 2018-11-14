@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MovieEntities;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore;
+using AutoMapper;
 
 namespace DataCompiler
 {
@@ -13,12 +13,14 @@ namespace DataCompiler
         {
             // Trying here too
             services.AddDbContext<MovieContext>(options => options.UseSqlite("Data Source=Movie.db", b => b.MigrationsAssembly("MovieEntities")));
+
+            services.AddAutoMapper();
+
             services.BuildServiceProvider();
         }
 
         public void Configure(IApplicationLifetime app)
         {
-
         }
     }
 }
