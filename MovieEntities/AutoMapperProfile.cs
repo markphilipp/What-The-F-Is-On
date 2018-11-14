@@ -11,8 +11,6 @@ namespace MovieEntities
 {
     public class AutoMapperProfile : Profile
     {
-        private readonly MovieContext _movieContext;
-
         public AutoMapperProfile()
         {
             CreateMapsViaReflection();
