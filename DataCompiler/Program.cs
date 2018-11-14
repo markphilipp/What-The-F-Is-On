@@ -9,26 +9,22 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using DataCompiler.Interfaces;
+using DataCompiler.Containerization;
 
 namespace DataCompiler
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             // Call the startup class config methods
-            var host = BuildWebHost(args);
+            var startup = new Startup();
+            startup.ConfigureContainer();
 
-            using (var a = host.Services.CreateScope())
-            {
-                new DataLoader().Run();
-            }
+            // Resolve our main entry point and run
+            var dataLoader = ConsoleContainer.Current.GetService<IDataLoader>();
+            dataLoader.Run();
         }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
     }
 }

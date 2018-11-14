@@ -20,5 +20,9 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Containerization\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Containerization.cs" />
   </ItemGroup>
 </Project>
