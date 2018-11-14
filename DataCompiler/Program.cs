@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using MovieEntities.Serialization;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using MovieEntities;
 
 namespace DataCompiler
 {
@@ -14,15 +18,17 @@ namespace DataCompiler
 
         static void Main(string[] args)
         {
-            //for (var i = 0; i <= 100; i++)
-            //{
+            // Call the startup class config methods
+            WebHost.CreateDefaultBuilder(args)
+                   .UseStartup<Startup>()
+                   .Build()
+                   .Run();
 
-            //}
-
+            // Just testing the method
             var r = GetResult().Result;
         }
 
-        private static async Task<List<MovieRating>> GetResult()
+        private static async Task<List<MovieEntities.Serialization.MovieRating>> GetResult()
         {
             var client = new HttpClient()
             {
@@ -34,7 +40,7 @@ namespace DataCompiler
 
             var streamResult = client.GetStreamAsync(url);
             using (var responseRead = new JsonTextReader(new StreamReader(await streamResult)))
-                return deserializer.Deserialize<List<MovieRating>>(responseRead);
+                return deserializer.Deserialize<List<MovieEntities.Serialization.MovieRating>>(responseRead);
         }
     }
 }

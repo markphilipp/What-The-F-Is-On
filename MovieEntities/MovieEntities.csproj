@@ -18,5 +18,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="MovieContextFactory.cs" />
   </ItemGroup>
 </Project>
