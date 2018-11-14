@@ -19,14 +19,16 @@ namespace DataCompiler
         static void Main(string[] args)
         {
             // Call the startup class config methods
-            WebHost.CreateDefaultBuilder(args)
-                   .UseStartup<Startup>()
-                   .Build()
-                   .Run();
+            BuildWebHost(args).Run();
 
             // Just testing the method
             var r = GetResult().Result;
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .Build();
 
         private static async Task<List<MovieEntities.Serialization.MovieRating>> GetResult()
         {
