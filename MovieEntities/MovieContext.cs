@@ -10,6 +10,7 @@ namespace MovieEntities
         { }
 
         public DbSet<MovieRating> Ratings { get; set; }
+        public DbSet<MovieSource> Sources { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

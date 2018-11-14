@@ -2,12 +2,23 @@
 using System.Reflection;
 using AutoMapper;
 using System.Linq;
+using MovieEntities.Models;
 
 namespace MovieEntities
 {
     public class AutoMapperProfile : Profile
     {
-        public AutoMapperProfile()
+        private readonly MovieContext _movieContext;
+
+        public AutoMapperProfile(MovieContext movieContext)
+        {
+            this._movieContext = movieContext;
+
+            CreateMapsViaReflection();
+            AddCustomMappings();
+        }
+
+        private void CreateMapsViaReflection()
         {
             var serializationClasses = Assembly.GetAssembly(this.GetType())
                      .GetTypes()
@@ -25,6 +36,12 @@ namespace MovieEntities
 
                 CreateMap(serializationClass, modelClassMatch);
             }
+        }
+
+        private void AddCustomMappings()
+        {
+            CreateMap<string, MovieSource>()
+                .ConvertUsing(str => this._movieContext.Sources.FirstOrDefault(s => s.Name == str));
         }
     }
 }
