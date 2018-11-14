@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using MovieEntities.Interfaces;
-using MovieEntities.Models;
+using MovieEntities.Mapping.Interfaces;
+using MovieEntities.Mapping.Models;
 
-namespace MovieEntities.Converters
+namespace MovieEntities.Mapping
 {
     public class MovieSourceConverter : IMovieSourceConverter
     {

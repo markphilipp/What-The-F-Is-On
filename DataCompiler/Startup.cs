@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using MovieEntities;
+using MovieEntities.Mapping;
 using AutoMapper;
 using DataCompiler.Interfaces;
 using DataCompiler.Services;

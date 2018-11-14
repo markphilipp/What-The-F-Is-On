@@ -2,12 +2,12 @@
 using System.Reflection;
 using AutoMapper;
 using System.Linq;
-using MovieEntities.Models;
+using MovieEntities.Mapping.Models;
 using Containerization;
-using MovieEntities.Interfaces;
+using MovieEntities.Mapping.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MovieEntities
+namespace MovieEntities.Mapping
 {
     public class AutoMapperProfile : Profile
     {

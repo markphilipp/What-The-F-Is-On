@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataCompiler.Interfaces;
-using MovieEntities.Models;
+using MovieEntities.Mapping.Models;
 using Newtonsoft.Json;
 
 namespace DataCompiler.Services

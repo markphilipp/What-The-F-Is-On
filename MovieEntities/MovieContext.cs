@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using MovieEntities.Models;
+using MovieEntities.Mapping.Models;
 
-namespace MovieEntities
+namespace MovieEntities.Mapping
 {
     public class MovieContext : DbContext
     {

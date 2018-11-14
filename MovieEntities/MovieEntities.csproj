@@ -12,7 +12,7 @@
   <ItemGroup>
     <Folder Include="Serialization\" />
     <Folder Include="Models\" />
-    <Folder Include="Converters\" />
+    <Folder Include="Mapping\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>

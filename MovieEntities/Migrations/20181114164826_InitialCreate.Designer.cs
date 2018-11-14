@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MovieEntities;
+using MovieEntities.Mapping;
 
-namespace MovieEntities.Migrations
+namespace MovieEntities.Mapping.Migrations
 {
     [DbContext(typeof(MovieContext))]
     [Migration("20181114164826_InitialCreate")]
