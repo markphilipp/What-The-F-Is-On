@@ -3,6 +3,9 @@ using System.Reflection;
 using AutoMapper;
 using System.Linq;
 using MovieEntities.Models;
+using Containerization;
+using MovieEntities.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MovieEntities
 {
@@ -40,10 +43,10 @@ namespace MovieEntities
         {
             CreateMap<string, MovieSource>()
                 .ConvertUsing((str) => 
-            {
-                ConsoleContainer.Curren
-                this._movieContext.Sources.FirstOrDefault(s => s.Name == str);
-            });
+                {
+                    var context = ConsoleContainer.Current.GetService<IMovieSourceConverter>();
+                    return context.GetSourceFromName(str);
+                });
         }
     }
 }
