@@ -1,6 +1,6 @@
 ﻿using MovieEntities.Models;
 
-namespace MovieEntities.Converters
+namespace MovieEntities.Interfaces
 {
     public interface IMovieSourceConverter
     {

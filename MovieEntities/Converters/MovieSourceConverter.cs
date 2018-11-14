@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
+using MovieEntities.Interfaces;
 using MovieEntities.Models;
 
 namespace MovieEntities.Converters
 {
-    public class MovieSourceConverter
+    public class MovieSourceConverter : IMovieSourceConverter
     {
         private readonly MovieContext movieContext;
 
