@@ -12,6 +12,7 @@
   <ItemGroup>
     <Folder Include="Serialization\" />
     <Folder Include="Models\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
@@ -23,5 +24,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="MovieContextFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Containerization\Containerization.csproj" />
   </ItemGroup>
 </Project>

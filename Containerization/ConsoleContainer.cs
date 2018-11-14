@@ -1,5 +1,6 @@
 ﻿using System;
-namespace DataCompiler.Containerization
+
+namespace Containerization
 {
     public static class ConsoleContainer
     {

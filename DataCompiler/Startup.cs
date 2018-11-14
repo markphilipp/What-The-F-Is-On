@@ -2,11 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using MovieEntities;
-using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
 using DataCompiler.Interfaces;
 using DataCompiler.Services;
-using DataCompiler.Containerization;
+using Containerization;
 
 namespace DataCompiler
 {

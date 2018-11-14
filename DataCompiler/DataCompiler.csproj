@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MovieEntities\MovieEntities.csproj" />
+    <ProjectReference Include="..\Containerization\Containerization.csproj" />
   </ItemGroup>
     
   <ItemGroup>
@@ -20,7 +21,6 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Containerization\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Containerization.cs" />

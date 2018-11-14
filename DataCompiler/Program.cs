@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using MovieEntities.Serialization;
-using System.Threading.Tasks;
-using System.IO;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using DataCompiler.Interfaces;
-using DataCompiler.Containerization;
+using Containerization;
 
 namespace DataCompiler
 {
