@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace MovieEntities.Mapping.Serialization
+namespace MovieEntities.Serialization
 {
     public class MovieRating
     {

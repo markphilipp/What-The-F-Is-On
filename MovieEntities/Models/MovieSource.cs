@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MovieEntities.Mapping.Models
+namespace MovieEntities.Models
 {
     public class MovieSource
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MovieEntities.Mapping.Models
+namespace MovieEntities.Models
 {
     public class MovieRating
     {

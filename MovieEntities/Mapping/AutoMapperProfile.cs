@@ -2,9 +2,9 @@
 using System.Reflection;
 using AutoMapper;
 using System.Linq;
-using MovieEntities.Mapping.Models;
+using MovieEntities.Models;
 using Containerization;
-using MovieEntities.Mapping.Interfaces;
+using MovieEntities.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 

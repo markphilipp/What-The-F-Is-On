@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using MovieEntities.Mapping.Interfaces;
-using MovieEntities.Mapping.Models;
+using MovieEntities.Interfaces;
+using MovieEntities.Models;
 
 namespace MovieEntities.Mapping
 {
