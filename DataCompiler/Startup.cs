@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using MovieEntities.Mapping;
 using AutoMapper;
 using DataCompiler.Interfaces;
 using DataCompiler.Services;
 using Containerization;
+using MovieEntities;
 
 namespace DataCompiler
 {
