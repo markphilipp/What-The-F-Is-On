@@ -6,6 +6,9 @@ namespace MovieEntities.Mapping
 {
     public class MovieContext : DbContext
     {
+        public MovieContext()
+        { }
+
         public MovieContext(DbContextOptions<MovieContext> options) : base(options)
         { }
 
@@ -15,7 +18,7 @@ namespace MovieEntities.Mapping
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Trying it here
-            //optionsBuilder.UseSqlite("Data Source=Movie.db");
+            optionsBuilder.UseSqlite("Data Source=Movie.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
