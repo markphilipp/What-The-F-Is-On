@@ -30,6 +30,19 @@ namespace MovieEntities
                 new MovieSource { Id = 2, Name = "Hulu Plus" },
                 new MovieSource { Id = 3, Name = "Amazon Prime" }
             );
+
+            modelBuilder.Entity<MovieRatingSource>()
+                .HasKey(mrs => new { mrs.RatingId, mrs.SourceId });
+
+            modelBuilder.Entity<MovieRatingSource>()
+                .HasOne<MovieRating>(mrs => mrs.Rating)
+                .WithMany(r => r.RatingSources)
+                .HasForeignKey(mrs => mrs.RatingId);
+
+            modelBuilder.Entity<MovieRatingSource>()
+                .HasOne<MovieSource>(mrs => mrs.Source)
+                .WithMany()
+                .HasForeignKey(mrs => mrs.SourceId);
         }
     }
 }
