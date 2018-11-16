@@ -25,11 +25,11 @@ namespace DataCompiler.Services
             // Just testing the method
             var rawResults = GetResult().Result;
 
-            var models = _mapper.Map<MovieRating>(rawResults);
+            var models = _mapper.Map<List<MovieRating>>(rawResults);
             System.Diagnostics.Debugger.Log(1, "Debug", models.ToString());
         }
 
-        private static async Task<List<MovieRating>> GetResult()
+        private static async Task<List<MovieEntities.Serialization.MovieRating>> GetResult()
         {
             var client = new HttpClient();
             var deserializer = new JsonSerializer();
@@ -38,7 +38,7 @@ namespace DataCompiler.Services
 
             var streamResult = client.GetStreamAsync(url);
             using (var responseRead = new JsonTextReader(new StreamReader(await streamResult)))
-                return deserializer.Deserialize<List<MovieRating>>(responseRead);
+                return deserializer.Deserialize<List<MovieEntities.Serialization.MovieRating>>(responseRead);
         }
     }
 }

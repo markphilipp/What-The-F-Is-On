@@ -6,6 +6,8 @@ using DataCompiler.Interfaces;
 using DataCompiler.Services;
 using Containerization;
 using MovieEntities;
+using MovieEntities.Interfaces;
+using MovieEntities.Mapping;
 
 namespace DataCompiler
 {
@@ -22,6 +24,7 @@ namespace DataCompiler
             services.AddAutoMapper();
 
             services.AddScoped<IDataLoader, DataLoader>();
+            services.AddScoped<IMovieSourceConverter, MovieSourceConverter>();
 
             // Set the container for reference
             ConsoleContainer.Current = services.BuildServiceProvider();

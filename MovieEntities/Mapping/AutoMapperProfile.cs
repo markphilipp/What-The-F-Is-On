@@ -20,9 +20,9 @@ namespace MovieEntities.Mapping
 
         private void CreateMapsViaReflection()
         {
-            var currentAssembly = Assembly.GetAssembly(this.GetType());
+            var currentAssembly      = Assembly.GetAssembly(this.GetType());
             var serializationClasses = GetTypesStartingWithNamespace(currentAssembly, "MovieEntities.Serialization");
-            var modelClasses = GetTypesStartingWithNamespace(Assembly.GetAssembly(this.GetType()), "MovieEntities.Serialization");
+            var modelClasses         = GetTypesStartingWithNamespace(currentAssembly, "MovieEntities.Models");
 
             foreach (var serializationClass in serializationClasses)
             {
@@ -30,7 +30,7 @@ namespace MovieEntities.Mapping
 
                 // Skip anything that doesn't match
                 // TODO: should we log out a warning on non-matches?
-                if (modelClasses == null) continue;
+                if (modelClassMatch == null) continue;
 
                 CreateMap(serializationClass, modelClassMatch);
             }
