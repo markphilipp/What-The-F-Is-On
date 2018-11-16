@@ -14,9 +14,14 @@ namespace MovieEntities.Mapping
             this.movieContext = movieContext;
         }
 
-        public MovieSource GetSourceFromName(string name)
+        public MovieRatingSource CreateSourceFromName(string name)
         {
-            return movieContext.MovieSources.FirstOrDefault(s => s.Name == name);
+            var source = movieContext.MovieSources.FirstOrDefault(s => s.Name == name);
+
+            return new MovieRatingSource()
+            {
+                Source = source
+            };
         }
     }
 }

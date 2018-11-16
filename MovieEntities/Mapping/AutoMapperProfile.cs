@@ -38,11 +38,11 @@ namespace MovieEntities.Mapping
 
         private void AddCustomMappings()
         {
-            CreateMap<string, MovieSource>()
+            CreateMap<string, MovieRatingSource>()
                 .ConvertUsing((str) => 
                 {
                     var context = ConsoleContainer.Current.GetService<IMovieSourceConverter>();
-                    return context.GetSourceFromName(str);
+                    return context.CreateSourceFromName(str);
                 });
         }
 
