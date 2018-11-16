@@ -12,8 +12,8 @@ namespace MovieEntities
         public MovieContext(DbContextOptions<MovieContext> options) : base(options)
         { }
 
-        public DbSet<MovieRating> Ratings { get; set; }
-        public DbSet<MovieSource> Sources { get; set; }
+        public DbSet<MovieRating> MovieRatings { get; set; }
+        public DbSet<MovieSource> MovieSources { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

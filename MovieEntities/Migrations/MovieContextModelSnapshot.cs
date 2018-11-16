@@ -3,9 +3,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MovieEntities.Mapping;
+using MovieEntities;
 
-namespace MovieEntities.Mapping.Migrations
+namespace MovieEntities.Migrations
 {
     [DbContext(typeof(MovieContext))]
     partial class MovieContextModelSnapshot : ModelSnapshot
@@ -16,7 +16,7 @@ namespace MovieEntities.Mapping.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
 
-            modelBuilder.Entity("MovieEntities.Mapping.Models.MovieRating", b =>
+            modelBuilder.Entity("MovieEntities.Models.MovieRating", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -51,10 +51,10 @@ namespace MovieEntities.Mapping.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("MovieRatings");
                 });
 
-            modelBuilder.Entity("MovieEntities.Mapping.Models.MovieSource", b =>
+            modelBuilder.Entity("MovieEntities.Models.MovieSource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -67,7 +67,7 @@ namespace MovieEntities.Mapping.Migrations
 
                     b.HasIndex("MovieRatingId");
 
-                    b.ToTable("Sources");
+                    b.ToTable("MovieSources");
 
                     b.HasData(
                         new { Id = 1, Name = "Netflix" },
@@ -76,9 +76,9 @@ namespace MovieEntities.Mapping.Migrations
                     );
                 });
 
-            modelBuilder.Entity("MovieEntities.Mapping.Models.MovieSource", b =>
+            modelBuilder.Entity("MovieEntities.Models.MovieSource", b =>
                 {
-                    b.HasOne("MovieEntities.Mapping.Models.MovieRating")
+                    b.HasOne("MovieEntities.Models.MovieRating")
                         .WithMany("Sources")
                         .HasForeignKey("MovieRatingId");
                 });

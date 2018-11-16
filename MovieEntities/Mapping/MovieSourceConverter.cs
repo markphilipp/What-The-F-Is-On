@@ -16,7 +16,7 @@ namespace MovieEntities.Mapping
 
         public MovieSource GetSourceFromName(string name)
         {
-            return movieContext.Sources.FirstOrDefault(s => s.Name == name);
+            return movieContext.MovieSources.FirstOrDefault(s => s.Name == name);
         }
     }
 }

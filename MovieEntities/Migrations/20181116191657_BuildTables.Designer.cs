@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MovieEntities.Mapping;
+using MovieEntities;
 
-namespace MovieEntities.Mapping.Migrations
+namespace MovieEntities.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20181114164826_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20181116191657_BuildTables")]
+    partial class BuildTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace MovieEntities.Mapping.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("MovieRatings");
                 });
 
             modelBuilder.Entity("MovieEntities.Models.MovieSource", b =>
@@ -69,7 +69,13 @@ namespace MovieEntities.Mapping.Migrations
 
                     b.HasIndex("MovieRatingId");
 
-                    b.ToTable("MovieSource");
+                    b.ToTable("MovieSources");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Netflix" },
+                        new { Id = 2, Name = "Hulu Plus" },
+                        new { Id = 3, Name = "Amazon Prime" }
+                    );
                 });
 
             modelBuilder.Entity("MovieEntities.Models.MovieSource", b =>
