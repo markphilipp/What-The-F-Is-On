@@ -15,11 +15,12 @@ namespace MovieEntities.Models
         public bool HasBackdrop { get; set; }
         public DateTime ReleasedOn { get; set; }
         public string Classification { get; set; }
-        public IList<MovieSource> Sources { get; set; }
         public bool OnServices { get; set; }
         public bool OnFree { get; set; }
         public bool OnRentPurchase { get; set; }
         public bool Watchlisted { get; set; }
         public bool Seen { get; set; }
+
+        public ICollection<MovieRatingSource> RatingSources { get; set; }
     }
 }
