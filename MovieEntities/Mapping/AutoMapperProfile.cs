@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Reflection;
 using AutoMapper;
 using System.Linq;
@@ -32,14 +33,19 @@ namespace MovieEntities.Mapping
                 // TODO: should we log out a warning on non-matches?
                 if (modelClassMatch == null) continue;
 
-                CreateMap(serializationClass, modelClassMatch);
+                var newMap = CreateMap(serializationClass, modelClassMatch);
+                var attrMapper = new AutomapAttributeMapper(newMap, modelClassMatch, serializationClass);
+
+
             }
         }
+
+
 
         private void AddCustomMappings()
         {
             CreateMap<string, MovieRatingSource>()
-                .ConvertUsing((str) => 
+                .ConvertUsing(str =>
                 {
                     var context = ConsoleContainer.Current.GetService<IMovieSourceConverter>();
                     return context.CreateSourceFromName(str);
