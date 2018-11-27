@@ -28,7 +28,28 @@ namespace MovieEntities
             modelBuilder.Entity<MovieSource>().HasData(
                 new MovieSource { Id = 1, Name = "Netflix" },
                 new MovieSource { Id = 2, Name = "Hulu Plus" },
-                new MovieSource { Id = 3, Name = "Amazon Prime" }
+                new MovieSource { Id = 3, Name = "Amazon Prime" },
+                new MovieSource { Id = 4, Name = "HBO", Code = "hbo" },
+                new MovieSource { Id = 5, Name = "Showtime", Code = "showtime" },
+                new MovieSource { Id = 6, Name = "Starz", Code = "starz" },
+                new MovieSource { Id = 7, Name = "Mubi", Code = "mubi" },
+                new MovieSource { Id = 8, Name = "Cinemax", Code = "cinemax" },
+                new MovieSource { Id = 9, Name = "CBS All Access", Code = "cbs_all_access" },
+                new MovieSource { Id = 10, Name = "Fandor", Code = "fandor" },
+                new MovieSource { Id = 11, Name = "Acorntv", Code = "acorntv" },
+                new MovieSource { Id = 12, Name = "Film Struck", Code = "film_struck" },
+                new MovieSource { Id = 13, Name = "Shudder", Code = "shudder" },
+                new MovieSource { Id = 14, Name = "Fx TVEverywhere", Code = "fx_tveverywhere" },
+                new MovieSource { Id = 15, Name = "Fox TVEverywhere", Code = "fox_tveverywhere" },
+                new MovieSource { Id = 16, Name = "Hallmark everywhere", Code = "hallmark_everywhere" },
+                new MovieSource { Id = 17, Name = "Lifetime TVEverywhere", Code = "lifetime_tveverywhere" },
+                new MovieSource { Id = 18, Name = "Sundance TVEverywhere", Code = "sundance_tveverywhere" },
+                new MovieSource { Id = 19, Name = "TBS", Code = "tbs" },
+                new MovieSource { Id = 20, Name = "TNT", Code = "tnt" },
+                new MovieSource { Id = 21, Name = "IFC", Code = "ifc" },
+                new MovieSource { Id = 22, Name = "TCM", Code = "watch_tcm" },
+                new MovieSource { Id = 23, Name = "Any", Code = "#any#" },
+                new MovieSource { Id = 24, Name = "Free", Code = "#free#" }
             );
 
             modelBuilder.Entity<MovieRatingSource>()
