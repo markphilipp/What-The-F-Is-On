@@ -7,16 +7,16 @@ namespace MovieEntities.Mapping
 {
     public class MovieSourceConverter : IMovieSourceConverter
     {
-        private readonly MovieContext movieContext;
+        private readonly MovieContext _movieContext;
 
         public MovieSourceConverter(MovieContext movieContext)
         {
-            this.movieContext = movieContext;
+            this._movieContext = movieContext;
         }
 
         public MovieRatingSource CreateSourceFromName(string name)
         {
-            var source = movieContext.MovieSources.FirstOrDefault(s => s.Name == name);
+            var source = _movieContext.MovieSources.FirstOrDefault(s => s.Name == name);
 
             return new MovieRatingSource()
             {
