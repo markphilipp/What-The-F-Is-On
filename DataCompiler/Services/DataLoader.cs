@@ -43,13 +43,11 @@ namespace DataCompiler.Services
             _context.SaveChanges();
         }
 
-        private static MovieEntities.Serialization.MovieRating CleanModelSources(MovieEntities.Serialization.MovieRating model)
+        private static void CleanModelSources(MovieEntities.Serialization.MovieRating model)
         {
             var sourceList = model.Sources.ToList();
             sourceList.RemoveAll(s => s == null);
             model.Sources = sourceList.ToArray();
-
-            return model;
         }
 
         private static async Task<List<MovieEntities.Serialization.MovieRating>> GetResult()
