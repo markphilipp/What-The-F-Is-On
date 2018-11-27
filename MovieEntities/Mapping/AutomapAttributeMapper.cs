@@ -27,6 +27,7 @@ namespace MovieEntities.Mapping
         public Type SourceType { get; private set; }
         public Type DestinationType { get; private set; }
 
+        /// <inheritdoc />
         /// <summary>
         /// Create all of the maps needed for the source/dest types based on custom attributes
         /// </summary>
@@ -55,7 +56,7 @@ namespace MovieEntities.Mapping
         private void CreateCustomPropertyMap(PropertyInfo customMappedProp)
         {
             var attribute = GetCustomMapAttribute(customMappedProp);
-            this.MappingExpression.ForMember(customMappedProp.Name, conf => conf.MapFrom(attribute.DestProperty));
+            this.MappingExpression.ForMember(attribute.DestProperty, conf => conf.MapFrom(customMappedProp.Name));
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace MovieEntities.Mapping
         private AutomapAttribute GetCustomMapAttribute(PropertyInfo property)
         {
             var attr = property.GetCustomAttribute<AutomapAttribute>();
-            return attr.DestType == this.DestinationType ? attr : null;
+            return attr != null && attr.DestType == this.DestinationType ? attr : null;
         }
     }
 }

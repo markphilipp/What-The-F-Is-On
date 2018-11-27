@@ -1,4 +1,5 @@
 ﻿using System;
+using MovieEntities.Mapping;
 using Newtonsoft.Json;
 
 namespace MovieEntities.Serialization
@@ -36,6 +37,7 @@ namespace MovieEntities.Serialization
         public string Classification { get; set; }
 
         [JsonProperty(PropertyName = "sources")]
+        [AutomapAttribute(typeof(Models.MovieRating), "RatingSources")]
         public string[] Sources { get; set; }
 
         [JsonProperty(PropertyName = "on_services")]

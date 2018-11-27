@@ -34,14 +34,16 @@ namespace MovieEntities.Mapping
                 if (modelClassMatch == null) continue;
 
                 var newMap = CreateMap(serializationClass, modelClassMatch);
-                var attrMapper = new AutomapAttributeMapper(newMap, modelClassMatch, serializationClass);
 
-
+                // Delegate to mapper to create custom maps
+                var attrMapper = new AutomapAttributeMapper(newMap, serializationClass, modelClassMatch);
+                attrMapper.CreateCustomPropertyMaps();
             }
         }
 
-
-
+        /// <summary>
+        /// Custom manual mappings
+        /// </summary>
         private void AddCustomMappings()
         {
             CreateMap<string, MovieRatingSource>()
@@ -52,7 +54,7 @@ namespace MovieEntities.Mapping
                 });
         }
 
-        private IEnumerable<Type> GetTypesStartingWithNamespace(Assembly assembly, string nspace)
+        private static IEnumerable<Type> GetTypesStartingWithNamespace(Assembly assembly, string nspace)
         {
             return assembly
                 .GetTypes()

@@ -4,6 +4,6 @@ namespace MovieEntities.Interfaces
 {
     public interface IMovieSourceConverter
     {
-        MovieRatingSource CreateSourceFromName(string name);
+        MovieRatingSource CreateSourceFromName(string code);
     }
 }
