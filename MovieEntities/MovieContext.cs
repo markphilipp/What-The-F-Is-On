@@ -56,7 +56,10 @@ namespace MovieEntities
                 new MovieSource { Id = 28, Name = "Comedy Central TVEverywhere", Code = "comedycentral_tveverywhere" },
                 new MovieSource { Id = 29, Name = "DOC Club", Code = "doc_club" },
                 new MovieSource { Id = 30, Name = "Sundance Now DOC Club", Code = "sundancenowdocclub" },
-                new MovieSource { Id = 31, Name = "NBC TVEverywhere", Code = "nbc_tveverywhere" }
+                new MovieSource { Id = 31, Name = "NBC TVEverywhere", Code = "nbc_tveverywhere" },
+                new MovieSource {Id = 32, Name = "epix", Code = "epix" },
+                new MovieSource {Id = 33, Name = "abc_family", Code = "abc_family" },
+                new MovieSource {Id = 34, Name = "tribeca_shortlist", Code = "tribeca_shortlist" }
             );
 
             modelBuilder.Entity<MovieRatingSource>()

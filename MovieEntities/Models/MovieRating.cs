@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MovieEntities.Models
 {
+    [System.Diagnostics.DebuggerDisplay("{Title} - {Id}")]
     public class MovieRating
     {
         public Guid Id { get; set; }
