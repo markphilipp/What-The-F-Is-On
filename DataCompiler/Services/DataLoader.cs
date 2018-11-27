@@ -29,25 +29,15 @@ namespace DataCompiler.Services
             // Just testing the method
             var rawResults = GetResult().Result;
 
-            foreach (var raw in rawResults)
-                CleanModelSources(raw);
-
             var models = _mapper.Map<List<MovieRating>>(rawResults);
 
             // I hate this but have to set the relationship up
             foreach(var model in models.Where(m => m.RatingSources != null))
-                foreach(var source in model.RatingSources)
+                foreach(var source in model.RatingSources.Where(rs => rs != null))
                     source.Rating = model;
 
             _context.AddRange(models);
             _context.SaveChanges();
-        }
-
-        private static void CleanModelSources(MovieEntities.Serialization.MovieRating model)
-        {
-            var sourceList = model.Sources.ToList();
-            sourceList.RemoveAll(s => s == null);
-            model.Sources = sourceList.ToArray();
         }
 
         private static async Task<List<MovieEntities.Serialization.MovieRating>> GetResult()
