@@ -26,9 +26,9 @@ namespace MovieEntities
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<MovieSource>().HasData(
-                new MovieSource { Id = 1, Name = "Netflix" },
-                new MovieSource { Id = 2, Name = "Hulu Plus" },
-                new MovieSource { Id = 3, Name = "Amazon Prime" },
+                new MovieSource { Id = 1, Name = "Netflix", Code = "netflix" },
+                new MovieSource { Id = 2, Name = "Hulu Plus", Code = "hulu_plus" },
+                new MovieSource { Id = 3, Name = "Amazon Prime", Code = "amazon_prime" },
                 new MovieSource { Id = 4, Name = "HBO", Code = "hbo" },
                 new MovieSource { Id = 5, Name = "Showtime", Code = "showtime" },
                 new MovieSource { Id = 6, Name = "Starz", Code = "starz" },
