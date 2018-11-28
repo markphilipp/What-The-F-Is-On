@@ -35,10 +35,8 @@ namespace DataCompiler.Helpers
         /// </summary>
         public void Run()
         {
-            for (int i = 0; i < 100; i++)
-            {
+            for (var i = 0; i < 100; i++)
                 SaveMovieRatings(i * 250);
-            }
         }
 
         /// <summary>
