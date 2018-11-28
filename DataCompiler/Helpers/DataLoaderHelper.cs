@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using MovieEntities;
+using MovieEntities.Repository;
 using Newtonsoft.Json;
 
 namespace DataCompiler.Helpers
@@ -17,14 +17,14 @@ namespace DataCompiler.Helpers
     public class DataLoaderHelper : IDataLoaderHelper
     {
         const string UrlTemplate = @"https://api.reelgood.com/v2/browse/filtered?availability=onAnySource&content_kind=movie&hide_seen=false&hide_tracked=false&hide_watchlisted=false&imdb_end=10&imdb_start=0&rt_end=100&rt_start=0&skip={0}&sort=0&take=250&year_end=2018&year_start=1980";
-        private readonly MovieContext _context;
+        private readonly IRepository _repository;
         private readonly IMissingMovieSourceHelper _missingMovieSourceHelper;
         private readonly IDuplicatesRatingHelper _duplicateRatingHelper;
         private readonly IRatingsMappingHelper _ratingsMappingHelper;
 
-        public DataLoaderHelper(MovieContext context, IMissingMovieSourceHelper missingMovieSourceHelper, IDuplicatesRatingHelper duplicateRatingHelper, IRatingsMappingHelper ratingsMappingHelper)
+        public DataLoaderHelper(IRepository repository, IMissingMovieSourceHelper missingMovieSourceHelper, IDuplicatesRatingHelper duplicateRatingHelper, IRatingsMappingHelper ratingsMappingHelper)
         {
-            _context = context;
+            _repository = repository;
             _missingMovieSourceHelper = missingMovieSourceHelper;
             _duplicateRatingHelper = duplicateRatingHelper;
             _ratingsMappingHelper = ratingsMappingHelper;
@@ -54,8 +54,8 @@ namespace DataCompiler.Helpers
             // For some reason getting duplicates, so am cleaning them below a certain threshold
             _duplicateRatingHelper.CleanDuplicateRatings(models);
 
-            _context.AddRange(models);
-            _context.SaveChanges();
+            _repository.AddRange(models);
+            _repository.Save();
         }
 
         private static List<MovieEntities.Serialization.MovieRating> GetRawMovieRatingsResult(int start)

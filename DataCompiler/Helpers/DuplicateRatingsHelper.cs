@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MovieEntities;
 using MovieEntities.Models;
+using MovieEntities.Repository;
 
 namespace DataCompiler.Helpers
 {
@@ -18,11 +19,11 @@ namespace DataCompiler.Helpers
 
     public class DuplicateRatingHelper : IDuplicatesRatingHelper
     {
-        private readonly MovieContext _context;
+        private readonly IRepository _repository;
 
-        public DuplicateRatingHelper(MovieContext context)
+        public DuplicateRatingHelper(IRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace DataCompiler.Helpers
         /// <exception cref="ApplicationException">Throws an exception if too many duplicate ratings are encountered</exception>
         public void CleanDuplicateRatings(List<MovieRating> models)
         {
-            var duplicateRatings = models.Where(m => _context.MovieRatings
+            var duplicateRatings = models.Where(m => _repository.Set<MovieRating>()
                     .Select(mr => mr.Id)
                     .Contains(m.Id))
                 .ToList();

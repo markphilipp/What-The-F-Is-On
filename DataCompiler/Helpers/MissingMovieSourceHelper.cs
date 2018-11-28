@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MovieEntities;
 using MovieEntities.Models;
+using MovieEntities.Repository;
 
 namespace DataCompiler.Helpers
 {
@@ -17,11 +18,11 @@ namespace DataCompiler.Helpers
 
     public class MissingMovieSourceHelper : IMissingMovieSourceHelper
     {
-        private readonly MovieContext _context;
+        private readonly IRepository _repository;
 
-        public MissingMovieSourceHelper(MovieContext context)
+        public MissingMovieSourceHelper(IRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         /// <summary>
@@ -31,8 +32,8 @@ namespace DataCompiler.Helpers
         public void AddMissingMovieSources(IEnumerable<MovieEntities.Serialization.MovieRating> rawResults)
         {
             var uniqueCodes = rawResults.SelectMany(r => r.Sources).Distinct();
-            var missingCodes = uniqueCodes.Where(u => !_context
-                    .MovieSources
+            var missingCodes = uniqueCodes.Where(u => !_repository
+                    .Set<MovieSource>()
                     .Select(s => s.Code)
                     .Contains(u))
                 .ToList();
@@ -42,8 +43,8 @@ namespace DataCompiler.Helpers
 
             Console.WriteLine($"Adding ${missingCodes.Count} missing codes");
 
-            _context.AddRange(missingCodes.Select(code => new MovieSource { Name = code, Code = code }));
-            _context.SaveChanges();
+            _repository.AddRange(missingCodes.Select(code => new MovieSource { Name = code, Code = code }));
+            _repository.Save();
         }
     }
 }

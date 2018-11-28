@@ -3,21 +3,22 @@ using System.IO;
 using System.Linq;
 using MovieEntities.Interfaces;
 using MovieEntities.Models;
+using MovieEntities.Repository;
 
 namespace MovieEntities.Mapping
 {
     public class MovieSourceConverter : IMovieSourceConverter
     {
-        private readonly MovieContext _movieContext;
+        private readonly IRepository _repository;
 
-        public MovieSourceConverter(MovieContext movieContext)
+        public MovieSourceConverter(IRepository repository)
         {
-            this._movieContext = movieContext;
+            this._repository = repository;
         }
 
         public MovieRatingSource CreateSourceFromName(string code)
         {
-            var source = _movieContext.MovieSources.FirstOrDefault(s => s.Code == code);
+            var source = _repository.Set<MovieSource>().FirstOrDefault(s => s.Code == code);
 
             if (source == null) throw new InvalidDataException($"Could not find a MovieSource record with code {code}. Make sure that the MovieContext has a record in OnModelCreating.");
 
