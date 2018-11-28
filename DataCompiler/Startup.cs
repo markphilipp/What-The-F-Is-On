@@ -26,6 +26,7 @@ namespace DataCompiler
             services.AddScoped<IMovieSourceConverter, MovieSourceConverter>();
             services.AddScoped<IDuplicateRatingHelper, DuplicateRatingHelper>();
             services.AddScoped<IMissingMovieSourceHelper, MissingMovieSourceHelper>();
+            services.AddScoped<IRatingsMappingHelper, RatingsMappingHelper>();
 
             // Set the container for reference
             ConsoleContainer.Current = services.BuildServiceProvider();

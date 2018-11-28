@@ -37,19 +37,16 @@ namespace DataCompiler.Helpers
                     .Contains(m.Id))
                 .ToList();
 
-            if (duplicateRatings.Count > 10)
-            {
+            // Keep getting duplicates for some reason from the API so continuing unless it's incredibly high
+            if (duplicateRatings.Count > 100)
                 throw new ApplicationException("Too many duplicates");
-            }
 
-            if (duplicateRatings.Any())
-            {
-                Console.WriteLine($"Encountered {duplicateRatings.Count} duplicates but is under the threshhold");
-                foreach (var dup in duplicateRatings)
-                {
-                    models.Remove(dup);
-                }
-            }
+            if (!duplicateRatings.Any()) return;
+
+            // Remove duplicates from models
+            Console.WriteLine($"Encountered {duplicateRatings.Count} duplicates but is under the threshhold");
+            foreach (var dup in duplicateRatings)
+                models.Remove(dup);
         }
     }
 }
