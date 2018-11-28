@@ -6,7 +6,7 @@ using MovieEntities.Models;
 
 namespace DataCompiler.Helpers
 {
-    public interface IDuplicateRatingHelper
+    public interface IDuplicatesRatingHelper
     {
         /// <summary>
         /// Clean up duplicate models
@@ -16,7 +16,7 @@ namespace DataCompiler.Helpers
         void CleanDuplicateRatings(List<MovieRating> models);
     }
 
-    public class DuplicateRatingHelper : IDuplicateRatingHelper
+    public class DuplicateRatingHelper : IDuplicatesRatingHelper
     {
         private readonly MovieContext _context;
 

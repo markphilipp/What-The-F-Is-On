@@ -19,10 +19,10 @@ namespace DataCompiler.Helpers
         const string UrlTemplate = @"https://api.reelgood.com/v2/browse/filtered?availability=onAnySource&content_kind=movie&hide_seen=false&hide_tracked=false&hide_watchlisted=false&imdb_end=10&imdb_start=0&rt_end=100&rt_start=0&skip={0}&sort=0&take=250&year_end=2018&year_start=1980";
         private readonly MovieContext _context;
         private readonly IMissingMovieSourceHelper _missingMovieSourceHelper;
-        private readonly IDuplicateRatingHelper _duplicateRatingHelper;
+        private readonly IDuplicatesRatingHelper _duplicateRatingHelper;
         private readonly IRatingsMappingHelper _ratingsMappingHelper;
 
-        public DataLoaderHelper(MovieContext context, IMissingMovieSourceHelper missingMovieSourceHelper, IDuplicateRatingHelper duplicateRatingHelper, IRatingsMappingHelper ratingsMappingHelper)
+        public DataLoaderHelper(MovieContext context, IMissingMovieSourceHelper missingMovieSourceHelper, IDuplicatesRatingHelper duplicateRatingHelper, IRatingsMappingHelper ratingsMappingHelper)
         {
             _context = context;
             _missingMovieSourceHelper = missingMovieSourceHelper;

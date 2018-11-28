@@ -24,7 +24,7 @@ namespace DataCompiler
 
             services.AddScoped<IDataLoaderHelper, DataLoaderHelper>();
             services.AddScoped<IMovieSourceConverter, MovieSourceConverter>();
-            services.AddScoped<IDuplicateRatingHelper, DuplicateRatingHelper>();
+            services.AddScoped<IDuplicatesRatingHelper, DuplicateRatingHelper>();
             services.AddScoped<IMissingMovieSourceHelper, MissingMovieSourceHelper>();
             services.AddScoped<IRatingsMappingHelper, RatingsMappingHelper>();
 
