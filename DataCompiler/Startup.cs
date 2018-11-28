@@ -7,6 +7,7 @@ using DataCompiler.Helpers;
 using MovieEntities;
 using MovieEntities.Interfaces;
 using MovieEntities.Mapping;
+using MovieEntities.Repository;
 
 namespace DataCompiler
 {
@@ -16,8 +17,8 @@ namespace DataCompiler
         {
             var services = new ServiceCollection();
 
-            // Trying here too
             services.AddDbContext<MovieContext>(options => options.UseSqlite("Data Source=Movie.db", b => b.MigrationsAssembly("MovieEntities")));
+            services.AddScoped<IRepository, Repository>();
 
             // Initialize automapper
             services.AddAutoMapper();

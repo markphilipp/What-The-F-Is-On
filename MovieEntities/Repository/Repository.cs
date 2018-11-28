@@ -93,7 +93,7 @@ namespace MovieEntities.Repository
 
         public void Dispose()
         {
-
+            _movieContext.Dispose();
         }
     }
 }
