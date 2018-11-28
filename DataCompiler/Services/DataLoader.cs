@@ -25,53 +25,67 @@ namespace DataCompiler.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Entry method to perform the data loading
+        /// </summary>
         public void Run()
         {
             for (int i = 0; i < 100; i++)
             {
-                GetResultSet(i * 250);
+                SaveMovieRatings(i * 250);
             }
         }
 
-        private void GetResultSet(int start)
+        /// <summary>
+        /// Retries and saves a set of movie ratings
+        /// </summary>
+        /// <param name="start">The starting index to retrieve</param>
+        private void SaveMovieRatings(int start)
         {
-            Console.WriteLine($"Getting records {start} to {start + 250}");
-            var requestUrl = String.Format(UrlTemplate, start);
+            var rawResults = GetRawMovieRatingsResult(start);
 
-            // Just testing the method
-            var rawResults = GetResult(requestUrl).Result;
+            AddMissingMovieSources(rawResults);
 
-            var uniqueCodes = rawResults.SelectMany(r => r.Sources).Distinct();
-            var missingCodes = uniqueCodes.Where(u => !_context
-                    .MovieSources
-                    .Select(s => s.Code)
-                    .Contains(u))
-                    .ToList();
-
-            if (rawResults.Count < 250)
-                Debugger.Break();
-
-            if (missingCodes.Any())
-            {
-                Console.WriteLine($"Adding ${missingCodes.Count} missing codes");
-                AddMissingCodes(missingCodes);
-            }
-
-            var models = _mapper.Map<List<MovieRating>>(rawResults);
-
-            // I hate this but have to set the relationship up
-            foreach(var model in models.Where(m => m.RatingSources != null))
-                foreach(var source in model.RatingSources.Where(rs => rs != null))
-                    source.Rating = model;
+            var models = ConvertRawResultsToModels(rawResults);
 
             // For some reason getting duplicates, so am cleaning them below a certain threshold
-            CleanDuplicates(models);
+            CleanDuplicateRatings(models);
 
             _context.AddRange(models);
             _context.SaveChanges();
         }
 
-        private void CleanDuplicates(List<MovieRating> models)
+        private static List<MovieEntities.Serialization.MovieRating> GetRawMovieRatingsResult(int start)
+        {
+            Console.WriteLine($"Getting records {start} to {start + 250}");
+            var requestUrl = String.Format(UrlTemplate, start);
+
+            // Just testing the method
+            var rawResults = GetApiResults(requestUrl).Result;
+
+            if (rawResults.Count < 250)
+                Debugger.Break();
+            return rawResults;
+        }
+
+        private List<MovieRating> ConvertRawResultsToModels(List<MovieEntities.Serialization.MovieRating> rawResults)
+        {
+            // 250 was the maximum number of ratings I was able to pull from the API at a time
+            var models = _mapper.Map<List<MovieRating>>(rawResults);
+
+            // I hate this but have to set the relationship up
+            foreach (var model in models.Where(m => m.RatingSources != null))
+                foreach (var source in model.RatingSources.Where(rs => rs != null))
+                    source.Rating = model;
+            return models;
+        }
+
+        /// <summary>
+        /// Clean up duplicate models
+        /// </summary>
+        /// <param name="models">List of moving ratings</param>
+        /// <exception cref="ApplicationException">Throws an exception if too many duplicate ratings are encountered</exception>
+        private void CleanDuplicateRatings(List<MovieRating> models)
         {
             var duplicateRatings = models.Where(m => _context.MovieRatings
                     .Select(mr => mr.Id)
@@ -93,21 +107,34 @@ namespace DataCompiler.Services
             }
         }
 
-        private void AddMissingCodes(List<string> missingCodes)
+        /// <summary>
+        /// Adds missing movie sources from raw result that aren't already stored
+        /// </summary>
+        /// <param name="rawResults">List of deserialized models</param>
+        private void AddMissingMovieSources(IEnumerable<MovieEntities.Serialization.MovieRating> rawResults)
         {
-            foreach (var code in missingCodes)
-            {
-                _context.Add(new MovieSource()
-                {
-                    Name = code,
-                    Code = code
-                });
-            }
+            var uniqueCodes = rawResults.SelectMany(r => r.Sources).Distinct();
+            var missingCodes = uniqueCodes.Where(u => !_context
+                    .MovieSources
+                    .Select(s => s.Code)
+                    .Contains(u))
+                .ToList();
 
+            // Just exit if we already have all the sources saved
+            if (!missingCodes.Any()) return;
+
+            Console.WriteLine($"Adding ${missingCodes.Count} missing codes");
+
+            _context.AddRange(missingCodes.Select(code => new MovieSource { Name = code, Code = code }));
             _context.SaveChanges();
         }
 
-        private static async Task<List<MovieEntities.Serialization.MovieRating>> GetResult(string requestUrl)
+        /// <summary>
+        /// Hits the All Flicks API to get a list of movie ratings
+        /// </summary>
+        /// <param name="requestUrl">The url to hit</param>
+        /// <returns>Deserialized list of movie ratings</returns>
+        private static async Task<List<MovieEntities.Serialization.MovieRating>> GetApiResults(string requestUrl)
         {
             var client = new HttpClient();
             var deserializer = new JsonSerializer();
