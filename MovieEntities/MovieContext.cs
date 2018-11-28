@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using MovieEntities.Mapping;
 using MovieEntities.Models;
 
 namespace MovieEntities
@@ -57,9 +58,14 @@ namespace MovieEntities
                 new MovieSource { Id = 29, Name = "DOC Club", Code = "doc_club" },
                 new MovieSource { Id = 30, Name = "Sundance Now DOC Club", Code = "sundancenowdocclub" },
                 new MovieSource { Id = 31, Name = "NBC TVEverywhere", Code = "nbc_tveverywhere" },
-                new MovieSource {Id = 32, Name = "epix", Code = "epix" },
-                new MovieSource {Id = 33, Name = "abc_family", Code = "abc_family" },
-                new MovieSource {Id = 34, Name = "tribeca_shortlist", Code = "tribeca_shortlist" }
+                new MovieSource {Id = 32, Name = "EPIX", Code = "epix" },
+                new MovieSource {Id = 33, Name = "ABC Family", Code = "abc_family" },
+                new MovieSource {Id = 34, Name = "Tribeca Shortlist", Code = "tribeca_shortlist" },
+                new MovieSource {Id = 35, Name = "Indie Flix Shorts", Code = "indieflixshorts" },
+                new MovieSource {Id = 36, Name = "Hallmark Movies Now", Code = "hallmark_movies_now" },
+                new MovieSource {Id = 37, Name = "Monsters Nightmares", Code = "monstersnightmares" },
+                new MovieSource {Id = 38, Name = "RealEYZ", Code = "realeyz" },
+                new MovieSource {Id = 39, Name = "Warriors Gangsters", Code = "warriorsgangsters" }
             );
 
             modelBuilder.Entity<MovieRatingSource>()

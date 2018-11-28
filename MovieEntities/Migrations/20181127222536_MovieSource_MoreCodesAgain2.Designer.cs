@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieEntities;
 
 namespace MovieEntities.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20181127222536_MovieSource_MoreCodesAgain2")]
+    partial class MovieSource_MoreCodesAgain2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,11 +117,7 @@ namespace MovieEntities.Migrations
                         new { Id = 32, Code = "epix", Name = "EPIX" },
                         new { Id = 33, Code = "abc_family", Name = "ABC Family" },
                         new { Id = 34, Code = "tribeca_shortlist", Name = "Tribeca Shortlist" },
-                        new { Id = 35, Code = "indieflixshorts", Name = "Indie Flix Shorts" },
-                        new { Id = 36, Code = "hallmark_movies_now", Name = "Hallmark Movies Now" },
-                        new { Id = 37, Code = "monstersnightmares", Name = "Monsters Nightmares" },
-                        new { Id = 38, Code = "realeyz", Name = "RealEYZ" },
-                        new { Id = 39, Code = "warriorsgangsters", Name = "Warriors Gangsters" }
+                        new { Id = 35, Code = "indieflixshorts", Name = "Indie Flix Shorts" }
                     );
                 });
 
