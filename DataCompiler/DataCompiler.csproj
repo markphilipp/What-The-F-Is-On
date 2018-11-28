@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Containerization.cs" />
