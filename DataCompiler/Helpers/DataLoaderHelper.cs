@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
-using DataCompiler.Interfaces;
 using MovieEntities;
 using MovieEntities.Models;
 using Newtonsoft.Json;
