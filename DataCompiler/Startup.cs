@@ -2,9 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-using DataCompiler.Interfaces;
-using DataCompiler.Services;
 using Containerization;
+using DataCompiler.Helpers;
 using MovieEntities;
 using MovieEntities.Interfaces;
 using MovieEntities.Mapping;
@@ -23,8 +22,10 @@ namespace DataCompiler
             // Initialize automapper
             services.AddAutoMapper();
 
-            services.AddScoped<IDataLoader, DataLoaderHelper>();
+            services.AddScoped<IDataLoaderHelper, DataLoaderHelper>();
             services.AddScoped<IMovieSourceConverter, MovieSourceConverter>();
+            services.AddScoped<IDuplicateRatingHelper, DuplicateRatingHelper>();
+            services.AddScoped<IMissingMovieSourceHelper, MissingMovieSourceHelper>();
 
             // Set the container for reference
             ConsoleContainer.Current = services.BuildServiceProvider();

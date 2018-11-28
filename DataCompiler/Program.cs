@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using DataCompiler.Interfaces;
 using Containerization;
+using DataCompiler.Helpers;
 
 namespace DataCompiler
 {
@@ -14,7 +14,7 @@ namespace DataCompiler
             startup.ConfigureContainer();
 
             // Resolve our main entry point and run
-            var dataLoader = ConsoleContainer.Current.GetService<IDataLoader>();
+            var dataLoader = ConsoleContainer.Current.GetService<IDataLoaderHelper>();
             dataLoader.Run();
         }
     }

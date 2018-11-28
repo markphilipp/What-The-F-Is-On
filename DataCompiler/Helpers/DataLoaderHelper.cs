@@ -10,23 +10,27 @@ using MovieEntities;
 using MovieEntities.Models;
 using Newtonsoft.Json;
 
-namespace DataCompiler.Services
+namespace DataCompiler.Helpers
 {
-    public interface IDataLoader
+    public interface IDataLoaderHelper
     {
         void Run();
     }
 
-    public class DataLoaderHelper : IDataLoader
+    public class DataLoaderHelper : IDataLoaderHelper
     {
         const string UrlTemplate = @"https://api.reelgood.com/v2/browse/filtered?availability=onAnySource&content_kind=movie&hide_seen=false&hide_tracked=false&hide_watchlisted=false&imdb_end=10&imdb_start=0&rt_end=100&rt_start=0&skip={0}&sort=0&take=250&year_end=2018&year_start=1980";
         private readonly IMapper _mapper;
         private readonly MovieContext _context;
+        private readonly IMissingMovieSourceHelper _missingMovieSourceHelper;
+        private readonly IDuplicateRatingHelper _duplicateRatingHelper;
 
-        public DataLoaderHelper(IMapper mapper, MovieContext context)
+        public DataLoaderHelper(IMapper mapper, MovieContext context, IMissingMovieSourceHelper missingMovieSourceHelper, IDuplicateRatingHelper duplicateRatingHelper)
         {
             _mapper = mapper;
             _context = context;
+            _missingMovieSourceHelper = missingMovieSourceHelper;
+            _duplicateRatingHelper = duplicateRatingHelper;
         }
 
         /// <summary>
@@ -48,12 +52,12 @@ namespace DataCompiler.Services
         {
             var rawResults = GetRawMovieRatingsResult(start);
 
-            AddMissingMovieSources(rawResults);
+            _missingMovieSourceHelper.AddMissingMovieSources(rawResults);
 
             var models = ConvertRawResultsToModels(rawResults);
 
             // For some reason getting duplicates, so am cleaning them below a certain threshold
-            CleanDuplicateRatings(models);
+            _duplicateRatingHelper.CleanDuplicateRatings(models);
 
             _context.AddRange(models);
             _context.SaveChanges();
@@ -82,55 +86,6 @@ namespace DataCompiler.Services
                 foreach (var source in model.RatingSources.Where(rs => rs != null))
                     source.Rating = model;
             return models;
-        }
-
-        /// <summary>
-        /// Clean up duplicate models
-        /// </summary>
-        /// <param name="models">List of moving ratings</param>
-        /// <exception cref="ApplicationException">Throws an exception if too many duplicate ratings are encountered</exception>
-        private void CleanDuplicateRatings(List<MovieRating> models)
-        {
-            var duplicateRatings = models.Where(m => _context.MovieRatings
-                    .Select(mr => mr.Id)
-                    .Contains(m.Id))
-                .ToList();
-
-            if (duplicateRatings.Count > 10)
-            {
-                throw new ApplicationException("Too many duplicates");
-            }
-
-            if (duplicateRatings.Any())
-            {
-                Console.WriteLine($"Encountered {duplicateRatings.Count} duplicates but is under the threshhold");
-                foreach (var dup in duplicateRatings)
-                {
-                    models.Remove(dup);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Adds missing movie sources from raw result that aren't already stored
-        /// </summary>
-        /// <param name="rawResults">List of deserialized models</param>
-        private void AddMissingMovieSources(IEnumerable<MovieEntities.Serialization.MovieRating> rawResults)
-        {
-            var uniqueCodes = rawResults.SelectMany(r => r.Sources).Distinct();
-            var missingCodes = uniqueCodes.Where(u => !_context
-                    .MovieSources
-                    .Select(s => s.Code)
-                    .Contains(u))
-                .ToList();
-
-            // Just exit if we already have all the sources saved
-            if (!missingCodes.Any()) return;
-
-            Console.WriteLine($"Adding ${missingCodes.Count} missing codes");
-
-            _context.AddRange(missingCodes.Select(code => new MovieSource { Name = code, Code = code }));
-            _context.SaveChanges();
         }
 
         /// <summary>
