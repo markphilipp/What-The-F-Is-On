@@ -23,7 +23,7 @@ namespace DataCompiler
             // Initialize automapper
             services.AddAutoMapper();
 
-            services.AddScoped<IDataLoader, DataLoader>();
+            services.AddScoped<IDataLoader, DataLoaderHelper>();
             services.AddScoped<IMovieSourceConverter, MovieSourceConverter>();
 
             // Set the container for reference
