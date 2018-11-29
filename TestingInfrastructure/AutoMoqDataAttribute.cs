@@ -9,7 +9,7 @@ namespace TestingInfrastructure
     public class AutoMoqDataAttribute : AutoDataAttribute
     {
         public AutoMoqDataAttribute()
-            : base(() => new Fixture().Customize(new AutoMoqCustomization()))
+            : base(() => new Fixture().Customize(new CompositeCustomization(new AutoMoqCustomization(), new SingletonFixture())))
         {
         }
     }

@@ -2,6 +2,7 @@
 using AutoFixture;
 using AutoFixture.AutoMoq;
 using AutoFixture.Xunit2;
+using Moq;
 using MovieEntities.Repository;
 
 namespace TestingInfrastructure
@@ -21,8 +22,9 @@ namespace TestingInfrastructure
         /// <returns>Instance of IFixture for use within the tests</returns>
         private static IFixture InitializeFixture()
         {
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-            fixture.Create<IRepository>();
+            var fixture = new Fixture()
+                .Customize(new CompositeCustomization(new AutoMoqCustomization(), new SingletonFixture()));
+            fixture.Freeze<Mock<IRepository>>();
             return fixture;
         }
     }
