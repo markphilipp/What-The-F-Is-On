@@ -11,7 +11,6 @@ namespace TestingInfrastructure
         public AutoMoqDataAttribute()
             : base(() => new Fixture().Customize(new AutoMoqCustomization()))
         {
-
         }
     }
 }
