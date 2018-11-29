@@ -27,6 +27,15 @@ namespace TestingInfrastructure
         /// </summary>
         public static T PickRandomNotMatching<T>(this IEnumerable<T> source, Predicate<T> match) => MatchUntil(source, s => !match(s));
 
+        public static IEnumerable<T> PickRandomSet<T>(this IEnumerable<T> source, int numOfItems)
+        {
+            if (numOfItems > source.Count()) throw new InvalidOperationException("Number of items in the list is less than the number of items requested");
+
+            return source
+                .OrderBy(s => Guid.NewGuid())
+                .Take(numOfItems);
+        }
+
         /// <summary>
         /// Helper method to find a
         /// </summary>
