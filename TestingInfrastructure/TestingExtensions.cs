@@ -11,13 +11,10 @@ namespace TestingInfrastructure
         /// </summary>
         public static T PickRandom<T>(this IEnumerable<T> source)
         {
-            // avoid multiple iterations of IEnumberable
-            var sourceList = source as T[] ?? source.ToArray();
+            if (!source.Any()) throw new InvalidOperationException("No items in the list");
 
-            if (!sourceList.Any()) throw new InvalidOperationException("No items in the list");
-
-            return sourceList.OrderBy(_ => Guid.NewGuid())
-                .Single();
+            return source.OrderBy(_ => Guid.NewGuid())
+                .First();
         }
 
         /// <summary>
@@ -35,16 +32,13 @@ namespace TestingInfrastructure
         /// </summary>
         private static T MatchUntil<T>(IEnumerable<T> source, Predicate<T> match)
         {
-            // avoid multiple iterations of IEnumberable
-            var sourceList = source as T[] ?? source.ToArray();
-
             // If there aren't any besides the excludes list, throw informative error
-            if (sourceList.All(s => !match(s))) throw new InvalidOperationException("No items available in list that are not excluded");
+            if (source.All(s => !match(s))) throw new InvalidOperationException("No items available in list that are not excluded");
 
             // Pick until we get one not in the list
-            var randomPick = sourceList.PickRandom();
-            while (match(randomPick))
-                randomPick = sourceList.PickRandom();
+            var randomPick = source.PickRandom();
+            while (!match(randomPick))
+                randomPick = source.PickRandom();
 
             return randomPick;
         }
