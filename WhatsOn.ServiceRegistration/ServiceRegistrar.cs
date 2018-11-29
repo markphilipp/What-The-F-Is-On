@@ -1,11 +1,10 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MovieEntities;
 using MovieEntities.Repository;
 
-namespace WhatsOn.ServiceRegistration
+namespace ServiceRegistration
 {
     public class ServiceRegistrar
     {

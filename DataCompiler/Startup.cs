@@ -4,7 +4,7 @@ using Containerization;
 using DataCompiler.Helpers;
 using MovieEntities.Interfaces;
 using MovieEntities.Mapping;
-using WhatsOn.ServiceRegistration;
+using ServiceRegistration;
 
 namespace DataCompiler
 {
