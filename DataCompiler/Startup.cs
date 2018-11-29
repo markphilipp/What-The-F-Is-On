@@ -1,13 +1,10 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using Containerization;
 using DataCompiler.Helpers;
-using MovieEntities;
 using MovieEntities.Interfaces;
 using MovieEntities.Mapping;
-using MovieEntities.Repository;
+using ServiceRegistration;
 
 namespace DataCompiler
 {
@@ -17,12 +14,10 @@ namespace DataCompiler
         {
             var services = new ServiceCollection();
 
-            services.AddDbContext<MovieContext>(options => options.UseSqlite("Data Source=Movie.db", b => b.MigrationsAssembly("MovieEntities")));
-            services.AddScoped<IRepository, Repository>();
+            // Run shared registration methods
+            new ServiceRegistrar().Run(services);
 
-            // Initialize automapper
-            services.AddAutoMapper();
-
+            // Custom helper registration
             services.AddScoped<IDataLoaderHelper, DataLoaderHelper>();
             services.AddScoped<IMovieSourceConverter, MovieSourceConverter>();
             services.AddScoped<IDuplicatesRatingHelper, DuplicateRatingHelper>();

@@ -47,11 +47,7 @@ namespace MovieEntities.Mapping
         private void AddCustomMappings()
         {
             CreateMap<string, MovieRatingSource>()
-                .ConvertUsing(str =>
-                {
-                    var context = ConsoleContainer.Current.GetService<IMovieSourceConverter>();
-                    return context.CreateSourceFromName(str);
-                });
+                .ConvertUsing(str => ConsoleContainer.Current.GetService<IMovieSourceConverter>().CreateSourceFromName(str));
         }
 
         private static IEnumerable<Type> GetTypesStartingWithNamespace(Assembly assembly, string nspace)
