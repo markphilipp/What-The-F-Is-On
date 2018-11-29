@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MovieEntities\MovieEntities.csproj" />
     <ProjectReference Include="..\Containerization\Containerization.csproj" />
+    <ProjectReference Include="..\WhatsOn.ServiceRegistration\WhatsOn.ServiceRegistration.csproj" />
   </ItemGroup>
     
   <ItemGroup>
