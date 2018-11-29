@@ -41,7 +41,7 @@ namespace DataCompiler.Tests
         {
             return TestingFixture.Current.Build<MovieRating>()
                 .Without(r => r.RatingSources)
-                .CreateMany()
+                .CreateMany(20)
                 .ToList();
         }
     }
