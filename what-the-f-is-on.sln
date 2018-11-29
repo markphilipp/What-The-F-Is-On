@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCompiler.Tests", "DataC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingInfrastructure", "TestingInfrastructure\TestingInfrastructure.csproj", "{A6BA2508-82CD-48AC-9AD0-2D4B3AEFA9AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsOn.ServiceRegistration", "WhatsOn.ServiceRegistration\WhatsOn.ServiceRegistration.csproj", "{6D9B5E08-9B06-4ED3-9827-BAC505D63602}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceRegistration", "ServiceRegistration\ServiceRegistration.csproj", "{6D9B5E08-9B06-4ED3-9827-BAC505D63602}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
