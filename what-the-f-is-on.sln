@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingInfrastructure", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsOn.API", "WhatsOn.API\WhatsOn.API.csproj", "{763DF777-0F36-4C40-843A-81052AB45A76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsOn.ServiceRegistration", "WhatsOn.ServiceRegistration\WhatsOn.ServiceRegistration.csproj", "{6D9B5E08-9B06-4ED3-9827-BAC505D63602}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,5 +45,9 @@ Global
 		{763DF777-0F36-4C40-843A-81052AB45A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{763DF777-0F36-4C40-843A-81052AB45A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{763DF777-0F36-4C40-843A-81052AB45A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9B5E08-9B06-4ED3-9827-BAC505D63602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9B5E08-9B06-4ED3-9827-BAC505D63602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9B5E08-9B06-4ED3-9827-BAC505D63602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9B5E08-9B06-4ED3-9827-BAC505D63602}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
